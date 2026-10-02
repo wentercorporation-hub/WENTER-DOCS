@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WENTER DOCS</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#ed1b24;
+  --red-dark:#c81018;
+  --red-soft:#fff1f2;
+  --white:#fff;
+  --text:#191919;
+  --muted:#777;
+  --border:#e8e8e8;
+  --shadow:0 18px 55px rgba(30,0,0,.12);
+}
+html,body{width:100%;height:100%;font-family:Arial,Helvetica,sans-serif;background:#f7f7f7;color:var(--text)}
+button,input{font:inherit}
+button{cursor:pointer}
+
+.screen{min-height:100vh}
+.hidden{display:none!important}
+
+/* ===== WELCOME ===== */
+#welcome{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+  background:
+    radial-gradient(circle at 10% 10%,#fff 0,#fff 20%,transparent 45%),
+    linear-gradient(135deg,#fff 0%,#fff 52%,#fff2f3 100%);
+}
+.welcome-card{
+  width:min(920px,100%);
+  min-height:570px;
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  display:flex;
+  overflow:hidden;
+}
+.welcome-left{
+  width:38%;
+  background:var(--red);
+  color:#fff;
+  padding:44px 36px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.logo-big{font-size:34px;font-weight:900;letter-spacing:-1px}
+.logo-big span{display:block;font-size:14px;letter-spacing:3px;margin-top:5px;opacity:.85}
+.project-list{margin-top:30px}
+.project-list div{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.22);font-weight:700}
+.welcome-left small{opacity:.8;line-height:1.5}
+.welcome-right{flex:1;padding:55px 58px;display:flex;flex-direction:column;justify-content:center}
+.welcome-right h1{font-size:40px;line-height:1.08;margin-bottom:18px}
+.welcome-right h1 b{color:var(--red)}
+.typing{
+  min-height:145px;
+  color:#555;
+  font-size:18px;
+  line-height:1.7;
+}
+.cursor{display:inline-block;width:2px;height:20px;background:var(--red);vertical-align:-3px;animation:blink .8s infinite}
+@keyframes blink{50%{opacity:0}}
+.enter-row{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.primary{
+  border:0;background:var(--red);color:#fff;padding:14px 25px;border-radius:10px;
+  font-weight:800;box-shadow:0 8px 22px rgba(237,27,36,.23);transition:.2s;
+}
+.primary:hover{background:var(--red-dark);transform:translateY(-1px)}
+.secondary{
+  border:1px solid #ddd;background:#fff;color:#222;padding:13px 22px;border-radius:10px;font-weight:700
+}
+
+/* ===== AUTH ===== */
+#auth{
+  display:none;align-items:center;justify-content:center;padding:25px;
+  background:linear-gradient(135deg,#fff 0%,#fff 60%,#fff0f1 100%);
+}
+.auth-box{
+  width:min(440px,100%);background:#fff;border:1px solid #eee;border-radius:22px;
+  box-shadow:var(--shadow);padding:34px;
+}
+.auth-logo{font-weight:900;font-size:27px;color:var(--red);margin-bottom:5px}
+.auth-sub{color:#777;margin-bottom:25px}
+.tabs{display:flex;background:#f5f5f5;padding:4px;border-radius:10px;margin-bottom:22px}
+.tabs button{flex:1;border:0;background:transparent;padding:10px;border-radius:8px;font-weight:800}
+.tabs button.active{background:#fff;color:var(--red);box-shadow:0 2px 8px #ddd}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+.form-group input{
+  width:100%;padding:13px 14px;border:1px solid #ddd;border-radius:9px;outline:none
+}
+.form-group input:focus{border-color:var(--red);box-shadow:0 0 0 3px #ffe3e5}
+.auth-message{min-height:20px;font-size:13px;margin:8px 0;color:var(--red)}
+.full{width:100%}
+.back-link{margin-top:16px;text-align:center;color:#777;font-size:13px;cursor:pointer}
+
+/* ===== APP ===== */
+#app{display:none;background:#f5f5f5;min-height:100vh}
+.topbar{
+  height:66px;background:var(--red);color:#fff;display:flex;align-items:center;
+  padding:0 16px;gap:10px;box-shadow:0 3px 12px rgba(0,0,0,.12)
+}
+.brand{font-size:23px;font-weight:900;letter-spacing:.3px;margin-right:6px}
+.tool-btn{
+  height:38px;min-width:38px;padding:0 11px;border:0;border-radius:7px;
+  background:rgba(255,255,255,.13);color:#fff;font-weight:800;transition:.2s
+}
+.tool-btn:hover{background:rgba(255,255,255,.25)}
+.tool-btn.white{background:#fff;color:var(--red)}
+.spacer{flex:1}
+.user-pill{font-size:13px;font-weight:700;padding:9px 12px;background:rgba(255,255,255,.12);border-radius:20px}
+
+.main{max-width:1180px;margin:auto;padding:42px 24px}
+.hero{
+  background:#fff;border:1px solid #eee;border-radius:22px;padding:35px;
+  box-shadow:0 10px 35px rgba(0,0,0,.06)
+}
+.hero h2{font-size:32px;margin-bottom:9px}
+.hero p{color:#777;line-height:1.6;max-width:760px}
+.cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px
+}
+.card{
+  background:#fff;border:1px solid #e8e8e8;border-radius:18px;padding:24px;
+  min-height:210px;display:flex;flex-direction:column;transition:.2s
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.icon{
+  width:48px;height:48px;border-radius:12px;background:var(--red-soft);color:var(--red);
+  display:flex;align-items:center;justify-content:center;font-size:23px;margin-bottom:15px
+}
+.card h3{font-size:21px;margin-bottom:8px}
+.card p{color:#777;line-height:1.5;font-size:14px;flex:1}
+.card button{align-self:flex-start;margin-top:18px}
+.notice{
+  margin-top:22px;background:#fff7f7;border:1px solid #ffd3d5;border-left:5px solid var(--red);
+  border-radius:14px;padding:17px 19px
+}
+.notice strong{display:block;margin-bottom:5px;color:var(--red)}
+.footer{text-align:center;color:#999;font-size:12px;padding:25px}
+
+/* Toast */
+.toast{
+  position:fixed;right:22px;bottom:22px;background:#191919;color:#fff;padding:13px 17px;
+  border-radius:10px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s;z-index:20
+}
+.toast.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:760px){
+  .welcome-card{flex-direction:column}
+  .welcome-left{width:100%;padding:28px}
+  .welcome-right{padding:34px 28px}
+  .welcome-right h1{font-size:31px}
+  .cards{grid-template-columns:1fr}
+  .user-pill{display:none}
+  .brand{font-size:19px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== WELCOME ===== -->
+<section id="welcome" class="screen">
+  <div class="welcome-card">
+    <aside class="welcome-left">
+      <div>
+        <div class="logo-big">WENTER DOCS<span>WEB DOCUMENTS</span></div>
+        <div class="project-list">
+          <div>WENTER WORD</div>
+          <div>WENTER EXCEL</div>
+          <div>WENTER POINT</div>
+        </div>
+      </div>
+      <small>Единое место для запуска веб-инструментов WENTER Corporation.</small>
+    </aside>
+
+    <main class="welcome-right">
+      <h1>Добро пожаловать в <b>WENTER DOCS</b></h1>
+      <div class="typing"><span id="typingText"></span><span class="cursor"></span></div>
+      <div class="enter-row">
+        <button class="primary" id="enterBtn">Войти в WENTER DOCS</button>
+        <button class="secondary" id="authBtn">Регистрация / вход</button>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- ===== AUTH ===== -->
+<section id="auth" class="screen">
+  <div class="auth-box">
+    <div class="auth-logo">WENTER DOCS</div>
+    <div class="auth-sub">Регистрация и вход в локальный профиль</div>
+
+    <div class="tabs">
+      <button id="loginTab" class="active">Вход</button>
+      <button id="registerTab">Регистрация</button>
+    </div>
+
+    <form id="authForm">
+      <div class="form-group">
+        <label for="username">Имя пользователя</label>
+        <input id="username" required autocomplete="username" placeholder="Например, WenterUser">
+      </div>
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input id="password" type="password" required autocomplete="current-password" placeholder="Введите пароль">
+      </div>
+      <div id="authMessage" class="auth-message"></div>
+      <button class="primary full" id="submitAuth" type="submit">Войти</button>
+    </form>
+    <div class="back-link" id="backWelcome">← Вернуться на главную</div>
+  </div>
+</section>
+
+<!-- ===== APP ===== -->
+<section id="app">
+  <header class="topbar">
+    <div class="brand">WENTER DOCS</div>
+    <button class="tool-btn" title="Главная" onclick="showApp()">⌂</button>
+    <button class="tool-btn" title="Открыть WENTER WORD" onclick="openSite('https://wentercorporation-hub.github.io/WENTER-WORD/')">▤</button>
+    <button class="tool-btn" title="Открыть WENTER EXCEL" onclick="openSite('https://wentercorporation-hub.github.io/WENTER-EXCEL/')">▦</button>
+    <button class="tool-btn" title="WENTER POINT" onclick="showToast('WENTER POINT сейчас находится в разработке.')">▣</button>
+    <div class="spacer"></div>
+    <div class="user-pill" id="userPill">Гость</div>
+    <button class="tool-btn white" onclick="logout()">Выйти</button>
+  </header>
+
+  <main class="main">
+    <div class="hero">
+      <h2>Документы WENTER в одном месте</h2>
+      <p>Запускайте веб-редакторы для текста и таблиц, а также следите за разработкой презентационного редактора WENTER POINT.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <div class="icon">W</div>
+        <h3>WENTER WORD</h3>
+        <p>Веб-редактор документов. Откройте его отдельной вкладкой и продолжайте работу.</p>
+        <button class="primary" onclick="openSite('https://wentercorporation-hub.github.io/WENTER-WORD/')">Открыть Word</button>
+      </article>
+
+      <article class="card">
+        <div class="icon">▦</div>
+        <h3>WENTER EXCEL</h3>
+        <p>Веб-таблицы WENTER для работы с данными и электронными таблицами.</p>
+        <button class="primary" onclick="openSite('https://wentercorporation-hub.github.io/WENTER-EXCEL/')">Открыть Excel</button>
+      </article>
+
+      <article class="card">
+        <div class="icon">P</div>
+        <h3>WENTER POINT</h3>
+        <p>Редактор презентаций уже готовится. Здесь будет запуск WENTER POINT после завершения разработки.</p>
+        <button class="secondary" onclick="showToast('Уведомление: над WENTER POINT идёт разработка.')">Подробнее</button>
+      </article>
+    </div>
+
+    <div class="notice">
+      <strong>WENTER POINT — в разработке</strong>
+      Мы работаем над веб-версией редактора презентаций. Кнопка станет активной после завершения разработки.
+    </div>
+
+    <div class="footer">© 2026 WENTER Corporation · WENTER DOCS</div>
+  </main>
+</section>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ===== ПЕЧАТАЮЩИЙСЯ ТЕКСТ ===== */
+const typingText = document.getElementById('typingText');
+const text = 'Мы создаём удобные веб-инструменты WENTER Corporation для работы с документами, таблицами и презентациями. WENTER DOCS объединяет проекты в одном простом пространстве, чтобы нужный редактор был всегда под рукой.';
+let index = 0;
+
+function typeText(){
+  if(index < text.length){
+    typingText.textContent += text.charAt(index++);
+    setTimeout(typeText, 28);
+  }
+}
+typeText();
+
+/* ===== НАВИГАЦИЯ ===== */
+const welcome = document.getElementById('welcome');
+const auth = document.getElementById('auth');
+const app = document.getElementById('app');
+
+function showApp(){
+  welcome.style.display='none';
+  auth.style.display='none';
+  app.style.display='block';
+  const saved = localStorage.getItem('wenterUser');
+  document.getElementById('userPill').textContent = saved ? saved : 'Гость';
+}
+
+document.getElementById('enterBtn').onclick = () => {
+  const saved = localStorage.getItem('wenterUser');
+  if(saved) showApp();
+  else showAuth('login');
+};
+
+document.getElementById('authBtn').onclick = () => showAuth('login');
+document.getElementById('backWelcome').onclick = () => {
+  auth.style.display='none';
+  welcome.style.display='flex';
+};
+
+function showAuth(mode){
+  welcome.style.display='none';
+  app.style.display='none';
+  auth.style.display='flex';
+  setMode(mode);
+}
+
+/* ===== АВТОРИЗАЦИЯ ===== */
+const loginTab = document.getElementById('loginTab');
+const registerTab = document.getElementById('registerTab');
+const submitAuth = document.getElementById('submitAuth');
+const authMessage = document.getElementById('authMessage');
+
+let authMode = 'login';
+
+function setMode(mode){
+  authMode = mode;
+  const login = mode === 'login';
+  loginTab.classList.toggle('active', login);
+  registerTab.classList.toggle('active', !login);
+  submitAuth.textContent = login ? 'Войти' : 'Создать аккаунт';
+  authMessage.textContent = '';
+}
+
+loginTab.onclick=()=>setMode('login');
+registerTab.onclick=()=>setMode('register');
+
+document.getElementById('authForm').addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const username=document.getElementById('username').value.trim();
+  const password=document.getElementById('password').value;
+
+  if(username.length < 3 || password.length < 4){
+    authMessage.textContent='Имя: минимум 3 символа, пароль: минимум 4.';
+    return;
+  }
+
+  if(authMode==='register'){
+    const users=JSON.parse(localStorage.getItem('wenterUsers')||'{}');
+    if(users[username]){
+      authMessage.textContent='Такой пользователь уже существует.';
+      return;
+    }
+    users[username]=password;
+    localStorage.setItem('wenterUsers',JSON.stringify(users));
+    localStorage.setItem('wenterUser',username);
+    showToast('Аккаунт создан.');
+    showApp();
+  }else{
+    const users=JSON.parse(localStorage.getItem('wenterUsers')||'{}');
+    if(!users[username] || users[username]!==password){
+      authMessage.textContent='Неверное имя пользователя или пароль.';
+      return;
+    }
+    localStorage.setItem('wenterUser',username);
+    showToast('Вход выполнен.');
+    showApp();
+  }
+});
+
+function logout(){
+  localStorage.removeItem('wenterUser');
+  app.style.display='none';
+  welcome.style.display='flex';
+  showToast('Вы вышли из WENTER DOCS.');
+}
+
+function openSite(url){
+  window.open(url,'_blank','noopener,noreferrer');
+}
+
+/* ===== УВЕДОМЛЕНИЯ ===== */
+let toastTimer;
+function showToast(message){
+  const toast=document.getElementById('toast');
+  toast.textContent=message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove('show'),3000);
+}
+
+/* Если пользователь уже вошёл — можно сразу открыть рабочую часть */
+if(localStorage.getItem('wenterUser')){
+  // Оставляем приветственный экран при каждом открытии, чтобы анимация показывалась снова.
+}
+</script>
+</body>
+</html>
